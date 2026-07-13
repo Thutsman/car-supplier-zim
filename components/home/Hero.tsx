@@ -32,7 +32,7 @@ export function Hero() {
           <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-brand-accent">
             Bulawayo, Zimbabwe
           </p>
-          <h1 className="uppercase">
+          <h1 className="notranslate uppercase" translate="no">
             <span className="block text-[clamp(1.35rem,1vw+1.05rem,2rem)] font-bold leading-[1.15] tracking-[0.02em] text-white/90">
               Drive what you love
             </span>

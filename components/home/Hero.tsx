@@ -27,7 +27,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="max-w-4xl"
+          className="max-w-5xl"
         >
           <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-brand-accent">
             Bulawayo, Zimbabwe
@@ -37,9 +37,9 @@ export function Hero() {
               Drive what you love
             </span>
             <span className="hero-gradient-text hero-glow-pulse mt-1 block text-[clamp(2.75rem,3vw+2rem,5.25rem)] font-black leading-[1.05] tracking-[-0.015em]">
-              Get your{" "}
-              <span className="hero-gradient-text-dream hero-glow-pulse-strong inline-block">
-                dream
+              Find your{" "}
+              <span className="hero-gradient-text-focus hero-glow-pulse-strong">
+                perfect
               </span>{" "}
               car
             </span>

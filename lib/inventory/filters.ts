@@ -1,15 +1,18 @@
 import type { InventoryFilters, SortOption, Vehicle } from "@/lib/data/types";
-import {
-  getMileageBounds,
-  getPriceBounds,
-  getYearBounds,
-} from "@/lib/data/vehicles-repo";
 
-export function getDefaultFilters(): InventoryFilters {
-  const price = getPriceBounds();
-  const year = getYearBounds();
-  const mileage = getMileageBounds();
+export interface FilterBounds {
+  price: { min: number; max: number };
+  year: { min: number; max: number };
+  mileage: { min: number; max: number };
+}
 
+// Bounds come from the server as props — importing the data repo here
+// would bundle it client-side and freeze bounds at their build-time values.
+export function getDefaultFilters({
+  price,
+  year,
+  mileage,
+}: FilterBounds): InventoryFilters {
   return {
     search: "",
     makes: [],

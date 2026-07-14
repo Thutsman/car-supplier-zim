@@ -41,7 +41,9 @@ export const vehicles: Vehicle[] = [
       },
     ],
     featured: false,
+    status: "available",
     createdAt: "2026-07-13",
+    updatedAt: "2026-07-13",
   },
   {
     id: "bmw-118d-f20",
@@ -96,7 +98,9 @@ export const vehicles: Vehicle[] = [
       },
     ],
     featured: true,
+    status: "available",
     createdAt: "2026-07-14",
+    updatedAt: "2026-07-14",
   },
   {
     id: "toyota-hiace-2017",
@@ -127,7 +131,9 @@ export const vehicles: Vehicle[] = [
       },
     ],
     featured: true,
+    status: "available",
     createdAt: "2026-07-14",
+    updatedAt: "2026-07-14",
   },
   {
     id: "bmw-420i-f32",
@@ -158,7 +164,9 @@ export const vehicles: Vehicle[] = [
       },
     ],
     featured: true,
+    status: "available",
     createdAt: "2026-07-13",
+    updatedAt: "2026-07-13",
   },
   {
     id: "audi-a4-2013",
@@ -188,7 +196,9 @@ export const vehicles: Vehicle[] = [
       },
     ],
     featured: true,
+    status: "available",
     createdAt: "2026-07-12",
+    updatedAt: "2026-07-12",
   },
   {
     id: "range-rover-evoque-2019",
@@ -217,7 +227,9 @@ export const vehicles: Vehicle[] = [
       },
     ],
     featured: false,
+    status: "available",
     createdAt: "2026-06-28",
+    updatedAt: "2026-06-28",
   },
   {
     id: "honda-crv-2017",
@@ -246,7 +258,9 @@ export const vehicles: Vehicle[] = [
       },
     ],
     featured: false,
+    status: "available",
     createdAt: "2026-06-20",
+    updatedAt: "2026-06-20",
   },
   {
     id: "lexus-rx350-2018",
@@ -275,7 +289,9 @@ export const vehicles: Vehicle[] = [
       },
     ],
     featured: false,
+    status: "available",
     createdAt: "2026-06-15",
+    updatedAt: "2026-06-15",
   },
   {
     id: "ford-ranger-2020",
@@ -305,7 +321,9 @@ export const vehicles: Vehicle[] = [
       },
     ],
     featured: false,
+    status: "available",
     createdAt: "2026-06-10",
+    updatedAt: "2026-06-10",
   },
   {
     id: "mazda-cx5-2019",
@@ -334,6 +352,8 @@ export const vehicles: Vehicle[] = [
       },
     ],
     featured: false,
+    status: "available",
     createdAt: "2026-06-05",
+    updatedAt: "2026-06-05",
   },
 ];

@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { StatusBadge } from "@/components/inventory/StatusBadge";
 import { VehicleGallery } from "@/components/inventory/VehicleGallery";
 import type { Vehicle } from "@/lib/data/types";
 import { company, getWhatsAppUrl } from "@/lib/data/company";
@@ -50,9 +51,14 @@ export function CarDetailModal({
         <div className="p-6 md:p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand">
-                {vehicle.make}
-              </p>
+              <div className="flex items-center gap-3">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand">
+                  {vehicle.make}
+                </p>
+                {vehicle.status !== "available" && (
+                  <StatusBadge status={vehicle.status} />
+                )}
+              </div>
               <h2 className="text-3xl font-extrabold text-ink">
                 {vehicle.model}
               </h2>

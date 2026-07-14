@@ -1,5 +1,6 @@
 export type Transmission = "Automatic" | "Manual";
 export type FuelType = "Petrol" | "Diesel" | "Hybrid" | "Electric";
+export type VehicleStatus = "available" | "sold" | "reserved";
 
 export interface VehicleImage {
   id: string;
@@ -22,7 +23,9 @@ export interface Vehicle {
   features: string[];
   images: VehicleImage[];
   featured: boolean;
+  status: VehicleStatus;
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface GalleryImage {

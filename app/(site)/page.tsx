@@ -5,6 +5,8 @@ import { Services } from "@/components/home/Services";
 import { ContactCTA } from "@/components/home/ContactCTA";
 import { getFeaturedVehicles } from "@/lib/data/vehicles-repo";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const featured = await getFeaturedVehicles();
 

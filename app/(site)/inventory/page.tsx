@@ -14,11 +14,17 @@ export const metadata: Metadata = {
   description: `Browse premium vehicles at ${company.name} in Bulawayo, Zimbabwe.`,
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function InventoryPage() {
-  const [vehicles, makes] = await Promise.all([getVehicles(), getMakes()]);
-  const priceBounds = getPriceBounds();
-  const yearBounds = getYearBounds();
-  const mileageBounds = getMileageBounds();
+  const [vehicles, makes, priceBounds, yearBounds, mileageBounds] =
+    await Promise.all([
+      getVehicles(),
+      getMakes(),
+      getPriceBounds(),
+      getYearBounds(),
+      getMileageBounds(),
+    ]);
 
   return (
     <InventoryPageClient

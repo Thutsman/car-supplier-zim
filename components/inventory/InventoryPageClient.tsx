@@ -28,7 +28,14 @@ export function InventoryPageClient({
   yearBounds,
   mileageBounds,
 }: InventoryPageClientProps) {
-  const [filters, setFilters] = useState<InventoryFilters>(getDefaultFilters());
+  const bounds = {
+    price: priceBounds,
+    year: yearBounds,
+    mileage: mileageBounds,
+  };
+  const [filters, setFilters] = useState<InventoryFilters>(() =>
+    getDefaultFilters(bounds)
+  );
   const [selected, setSelected] = useState<Vehicle | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -56,17 +63,9 @@ export function InventoryPageClient({
       </div>
 
       <div className="flex gap-10">
-        <InventoryFiltersPanel
-          filters={filters}
-          makes={makes}
-          priceBounds={priceBounds}
-          yearBounds={yearBounds}
-          mileageBounds={mileageBounds}
-          onChange={setFilters}
-          onReset={() => setFilters(getDefaultFilters())}
-        />
-
-        <div className="flex-1">
+        {/* The panel renders a desktop sidebar plus a mobile sheet trigger.
+            Scope each instance to one breakpoint so neither duplicates. */}
+        <div className="hidden shrink-0 lg:block">
           <InventoryFiltersPanel
             filters={filters}
             makes={makes}
@@ -74,8 +73,22 @@ export function InventoryPageClient({
             yearBounds={yearBounds}
             mileageBounds={mileageBounds}
             onChange={setFilters}
-            onReset={() => setFilters(getDefaultFilters())}
+            onReset={() => setFilters(getDefaultFilters(bounds))}
           />
+        </div>
+
+        <div className="flex-1">
+          <div className="lg:hidden">
+            <InventoryFiltersPanel
+              filters={filters}
+              makes={makes}
+              priceBounds={priceBounds}
+              yearBounds={yearBounds}
+              mileageBounds={mileageBounds}
+              onChange={setFilters}
+              onReset={() => setFilters(getDefaultFilters(bounds))}
+            />
+          </div>
 
           <div className="mb-6 hidden items-center justify-between lg:flex">
             <p className="text-sm text-muted-foreground">

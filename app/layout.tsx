@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
-import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { company } from "@/lib/data/company";
 import "./globals.css";
 
@@ -37,11 +34,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={jakarta.variable}>
-      <body className="flex min-h-screen flex-col bg-background text-foreground">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <WhatsAppFloat />
+      <body className="min-h-screen bg-background text-foreground">
+        {children}
       </body>
     </html>
   );

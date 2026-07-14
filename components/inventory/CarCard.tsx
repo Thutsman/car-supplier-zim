@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { Gauge, Calendar, Settings2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { StatusBadge } from "@/components/inventory/StatusBadge";
+import { isEphemeralUpload } from "@/lib/data/upload-urls";
 import type { Vehicle } from "@/lib/data/types";
 import { formatMileage, formatPrice } from "@/lib/inventory/filters";
 
@@ -31,13 +33,21 @@ export function CarCard({ vehicle, index = 0, onViewDetails }: CarCardProps) {
           src={primaryImage.url}
           alt={primaryImage.alt}
           fill
+          unoptimized={isEphemeralUpload(primaryImage.url)}
           className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        {vehicle.featured && (
-          <Badge className="absolute left-4 top-4 rounded-full bg-brand px-3 text-white hover:bg-brand">
-            Featured
-          </Badge>
+        {vehicle.status !== "available" ? (
+          <StatusBadge
+            status={vehicle.status}
+            className="absolute left-4 top-4"
+          />
+        ) : (
+          vehicle.featured && (
+            <Badge className="absolute left-4 top-4 rounded-full bg-brand px-3 text-white hover:bg-brand">
+              Featured
+            </Badge>
+          )
         )}
       </div>
 

@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
 import { MessageCircle, X } from "lucide-react";
 import {
   Dialog,
@@ -12,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { VehicleGallery } from "@/components/inventory/VehicleGallery";
 import type { Vehicle } from "@/lib/data/types";
 import { company, getWhatsAppUrl } from "@/lib/data/company";
 import { formatMileage, formatPrice } from "@/lib/inventory/filters";
@@ -27,8 +26,6 @@ export function CarDetailModal({
   open,
   onOpenChange,
 }: CarDetailModalProps) {
-  const [activeImage, setActiveImage] = useState(0);
-
   if (!vehicle) return null;
 
   const whatsappMessage = `Hello ${company.name}, I'm interested in the ${vehicle.year} ${vehicle.make} ${vehicle.model} (${formatPrice(vehicle.price)}). Please share more details.`;
@@ -42,38 +39,11 @@ export function CarDetailModal({
           </DialogTitle>
         </DialogHeader>
 
-        <div className="relative aspect-[16/9] w-full">
-          <Image
-            src={vehicle.images[activeImage]?.url ?? vehicle.images[0].url}
-            alt={vehicle.images[activeImage]?.alt ?? vehicle.model}
-            fill
-            className="object-cover"
-            sizes="(max-width: 896px) 100vw, 896px"
-          />
-        </div>
-
-        {vehicle.images.length > 1 && (
-          <div className="flex gap-2 overflow-x-auto px-6 pt-4">
-            {vehicle.images.map((img, i) => (
-              <button
-                key={img.id}
-                type="button"
-                onClick={() => setActiveImage(i)}
-                className={`relative h-16 w-24 shrink-0 overflow-hidden border-2 transition-colors ${
-                  activeImage === i ? "border-brand" : "border-transparent"
-                }`}
-              >
-                <Image
-                  src={img.url}
-                  alt={img.alt}
-                  fill
-                  className="object-cover"
-                  sizes="96px"
-                />
-              </button>
-            ))}
-          </div>
-        )}
+        <VehicleGallery
+          key={vehicle.id}
+          images={vehicle.images}
+          title={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
+        />
 
         <div className="p-6 md:p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">

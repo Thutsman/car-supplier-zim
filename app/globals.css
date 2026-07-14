@@ -126,24 +126,21 @@
     text-wrap: balance;
   }
   .hero-gradient-text {
-    background-image: linear-gradient(180deg, #ffffff 0%, #f1fff8 48%, #cdeadb 100%);
+    /* No text-shadow here: on background-clipped (transparent) text the
+       shadow bleeds through the glyphs and greys them out. drop-shadow
+       follows the alpha mask, so it stays behind the letterforms. */
+    background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 60%, #e9f7ef 100%);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    text-shadow:
-      0 3px 18px rgba(0, 0, 0, 0.6),
-      0 1px 2px rgba(0, 0, 0, 0.55);
-    filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5)) drop-shadow(0 14px 30px rgba(0, 0, 0, 0.45));
   }
   .hero-gradient-text-focus {
     background-image: linear-gradient(135deg, #c4ff8f 0%, #57f08c 46%, #12d472 100%);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    text-shadow:
-      0 3px 14px rgba(0, 0, 0, 0.55),
-      0 1px 0 rgba(255, 255, 255, 0.1);
-    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 32px rgba(80, 240, 140, 0.6));
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 32px rgba(80, 240, 140, 0.6));
   }
   .hero-glow-pulse {
     animation: hero-glow-pulse 4.6s ease-in-out 0.9s infinite;
@@ -196,10 +193,10 @@
 @keyframes hero-glow-pulse-strong {
   0%,
   100% {
-    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 32px rgba(80, 240, 140, 0.6));
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 32px rgba(80, 240, 140, 0.6));
   }
   50% {
-    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 52px rgba(80, 240, 140, 0.85));
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 52px rgba(80, 240, 140, 0.85));
   }
 }
 

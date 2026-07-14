@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { company } from "@/lib/data/company";
 
 const container: Variants = {
   hidden: {},
@@ -64,9 +63,9 @@ export function Hero() {
               variants={item}
               className="hero-gradient-text mt-1 block text-[clamp(3rem,3.4vw+2.1rem,5.75rem)] font-black leading-[1.02] tracking-[-0.02em]"
             >
-              Find your{" "}
+              Get your{" "}
               <span className="hero-gradient-text-focus hero-glow-pulse-strong">
-                perfect
+                dream
               </span>{" "}
               car
             </motion.span>
@@ -79,8 +78,8 @@ export function Hero() {
             variants={item}
             className="mt-6 max-w-xl text-lg font-medium leading-relaxed text-white/85 md:text-xl"
           >
-            {company.tagline}. Buying, selling, swaps, imports, and registration
-            — handled with care.
+            From first enquiry to keys in hand — buying, selling, swaps,
+            imports, and registration, handled with care.
           </motion.p>
           <motion.div
             variants={item}

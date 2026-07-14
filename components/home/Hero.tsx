@@ -18,9 +18,9 @@ export function Hero() {
         className="object-cover"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,131,70,0.28)_0%,rgba(0,99,48,0.62)_55%,rgba(30,36,48,0.78)_100%)]" />
-      <div className="absolute inset-0 bg-gradient-to-r from-brand/65 via-brand/28 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-black/10 to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,131,70,0.18)_0%,rgba(0,99,48,0.48)_55%,rgba(18,23,32,0.85)_100%)]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20" />
 
       <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-center px-6 pb-16 pt-24 md:px-10 lg:px-16">
         <motion.div
@@ -33,10 +33,10 @@ export function Hero() {
             Bulawayo, Zimbabwe
           </p>
           <h1 className="notranslate uppercase" translate="no">
-            <span className="block text-[clamp(1.35rem,1vw+1.05rem,2rem)] font-bold leading-[1.15] tracking-[0.02em] text-white/90">
+            <span className="block text-[clamp(1.35rem,1vw+1.05rem,2rem)] font-bold leading-[1.15] tracking-[0.02em] text-brand-accent">
               Drive what you love
             </span>
-            <span className="hero-gradient-text hero-glow-pulse mt-1 block text-[clamp(2.75rem,3vw+2rem,5.25rem)] font-black leading-[1.05] tracking-[-0.015em]">
+            <span className="hero-gradient-text mt-1 block text-[clamp(3rem,3.4vw+2.1rem,5.75rem)] font-black leading-[1.02] tracking-[-0.02em]">
               Find your{" "}
               <span className="hero-gradient-text-focus hero-glow-pulse-strong">
                 perfect
@@ -44,7 +44,7 @@ export function Hero() {
               car
             </span>
           </h1>
-          <div className="mt-5 h-[3px] w-14 rounded-full bg-gradient-to-r from-[#7dff5a] to-[#00b86b] shadow-[0_0_12px_rgba(69,226,107,0.55)]" />
+          <div className="mt-5 h-[4px] w-20 rounded-full bg-gradient-to-r from-[#7dff5a] to-[#00b86b] shadow-[0_0_16px_rgba(69,226,107,0.65)]" />
           <p className="mt-6 max-w-xl text-lg font-medium leading-relaxed text-white/85 md:text-xl">
             {company.tagline}. Buying, selling, swaps, imports, and registration
             — handled with care.

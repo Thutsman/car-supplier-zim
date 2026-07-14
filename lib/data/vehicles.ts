@@ -1,8 +1,9 @@
 import type { Vehicle } from "./types";
 
 /**
- * Representative stock photos matched to each make/model.
- * Replace with real showroom photos in Phase 2 CMS.
+ * Featured vehicles use real showroom photos from /public/vehicles.
+ * Non-featured entries still carry representative stock photos —
+ * replace with real showroom photos in Phase 2 CMS.
  */
 export const vehicles: Vehicle[] = [
   {
@@ -39,127 +40,131 @@ export const vehicles: Vehicle[] = [
         sortOrder: 1,
       },
     ],
+    featured: false,
+    createdAt: "2026-07-13",
+  },
+  {
+    id: "bmw-118d-f20",
+    make: "BMW",
+    model: "F20 118d",
+    // TODO: confirm year and mileage with the yard
+    year: 2016,
+    price: 15000,
+    mileage: 70000,
+    transmission: "Automatic",
+    fuelType: "Diesel",
+    color: "Crimson Red",
+    description:
+      "Just Arrived ✨ — BMW F20 118d in striking crimson red. Efficient turbo-diesel hatch with LED headlights and sporty presence, fresh on the lot in Bulawayo.",
+    features: [
+      "Turbo-diesel engine",
+      "LED headlights",
+      "Automatic transmission",
+      "Fog lamps",
+      "Multifunction steering wheel",
+    ],
+    images: [
+      {
+        id: "b118-1",
+        url: "/vehicles/bmw-118d.jpg",
+        alt: "Red BMW F20 118d front view at Car Supplier Zimbabwe",
+        sortOrder: 0,
+      },
+    ],
+    featured: true,
+    createdAt: "2026-07-14",
+  },
+  {
+    id: "toyota-hiace-2017",
+    make: "Toyota",
+    model: "HiAce (Baby Quantum)",
+    year: 2017,
+    price: 21500,
+    // TODO: confirm mileage and fuel type with the yard
+    mileage: 80000,
+    transmission: "Automatic",
+    fuelType: "Diesel",
+    color: "Silver",
+    description:
+      "Toyota Baby Quantum, recent import with duty paid. Automatic transmission, ready to work — ideal for commuter or business use.",
+    features: [
+      "Duty paid",
+      "Recent import",
+      "Automatic transmission",
+      "Alloy wheels",
+      "Sliding door",
+    ],
+    images: [
+      {
+        id: "hq-1",
+        url: "/vehicles/toyota-hiace.jpg",
+        alt: "Silver Toyota HiAce Baby Quantum at Car Supplier Zimbabwe",
+        sortOrder: 0,
+      },
+    ],
+    featured: true,
+    createdAt: "2026-07-14",
+  },
+  {
+    id: "bmw-420i-f32",
+    make: "BMW",
+    model: "F32 420i",
+    // TODO: confirm price, year, and mileage with the yard
+    year: 2015,
+    price: 24500,
+    mileage: 90000,
+    transmission: "Automatic",
+    fuelType: "Petrol",
+    color: "Alpine White",
+    description:
+      "BMW F32 420i coupé in Alpine White with M styling, carbon mirror caps, and a front splitter. A head-turning two-door available in Bulawayo.",
+    features: [
+      "M Sport styling",
+      "Carbon fibre mirror caps",
+      "Front splitter",
+      "Xenon headlights",
+      "Red leather interior",
+    ],
+    images: [
+      {
+        id: "b420-1",
+        url: "/vehicles/bmw-420i.jpg",
+        alt: "White BMW F32 420i coupé at Car Supplier Zimbabwe",
+        sortOrder: 0,
+      },
+    ],
     featured: true,
     createdAt: "2026-07-13",
   },
   {
-    id: "audi-a4-2020",
+    id: "audi-a4-2013",
     make: "Audi",
     model: "A4 Quattro",
-    year: 2020,
-    price: 22800,
-    mileage: 55000,
+    year: 2013,
+    price: 13000,
+    mileage: 99000,
     transmission: "Automatic",
     fuelType: "Petrol",
     color: "Glacier White",
     description:
-      "Elegant Audi A4 Quattro with all-wheel drive confidence. A refined daily driver with premium cabin materials and responsive performance.",
+      "Audi A4 Quattro in excellent condition — $13,000 negotiable. Full leather interior, automatic transmission, and all-wheel drive confidence. Bulawayo.",
     features: [
       "Quattro AWD",
-      "Virtual cockpit",
-      "Heated seats",
-      "Parking sensors",
-      "LED headlights",
+      "Full leather interior",
+      "Automatic transmission",
+      "Price negotiable",
+      "Excellent condition",
     ],
     images: [
       {
-        id: "a1",
-        url: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1400&q=80",
-        alt: "Audi A4 sedan",
+        id: "a4-1",
+        url: "/vehicles/audi-a4.jpg",
+        alt: "White Audi A4 Quattro at Car Supplier Zimbabwe",
         sortOrder: 0,
       },
     ],
     featured: true,
-    createdAt: "2026-07-10",
-  },
-  {
-    id: "vw-golf-2019",
-    make: "Volkswagen",
-    model: "Golf GTI",
-    year: 2019,
-    price: 18500,
-    mileage: 68000,
-    transmission: "Automatic",
-    fuelType: "Petrol",
-    color: "Atlantic Blue",
-    description:
-      "Sporty Volkswagen Golf GTI in excellent condition. Perfect balance of performance and practicality for the urban enthusiast.",
-    features: [
-      "Turbocharged engine",
-      "Sport suspension",
-      "Touchscreen infotainment",
-      "Dual-zone climate",
-    ],
-    images: [
-      {
-        id: "v1",
-        url: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=1400&q=80",
-        alt: "Volkswagen Golf hatchback",
-        sortOrder: 0,
-      },
-    ],
-    featured: true,
-    createdAt: "2026-07-08",
-  },
-  {
-    id: "toyota-prado-2018",
-    make: "Toyota",
-    model: "Land Cruiser Prado",
-    year: 2018,
-    price: 34500,
-    mileage: 89000,
-    transmission: "Automatic",
-    fuelType: "Diesel",
-    color: "Pearl White",
-    description:
-      "Capable Toyota Land Cruiser Prado built for Zimbabwe's roads. Spacious, reliable, and commanding on any terrain.",
-    features: [
-      "4WD",
-      "Leather seats",
-      "Third row seating",
-      "Roof rails",
-      "Tow bar",
-    ],
-    images: [
-      {
-        id: "t1",
-        url: "https://images.unsplash.com/photo-1594502184342-2e12fbaa5bef?auto=format&fit=crop&w=1400&q=80",
-        alt: "Toyota Land Cruiser Prado SUV",
-        sortOrder: 0,
-      },
-    ],
-    featured: true,
-    createdAt: "2026-07-05",
-  },
-  {
-    id: "bmw-320i-2020",
-    make: "BMW",
-    model: "320i M Sport",
-    year: 2020,
-    price: 24900,
-    mileage: 48000,
-    transmission: "Automatic",
-    fuelType: "Petrol",
-    color: "Mineral Grey",
-    description:
-      "BMW 320i M Sport with dynamic handling and executive presence. A driver's car with luxury appointments throughout.",
-    features: [
-      "M Sport package",
-      "Sunroof",
-      "Navigation",
-      "Parking assist",
-      "Keyless entry",
-    ],
-    images: [
-      {
-        id: "b1",
-        url: "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=1400&q=80",
-        alt: "BMW 3 Series sedan",
-        sortOrder: 0,
-      },
-    ],
-    featured: true,
-    createdAt: "2026-07-01",
+    createdAt: "2026-07-12",
   },
   {
     id: "range-rover-evoque-2019",
@@ -187,7 +192,7 @@ export const vehicles: Vehicle[] = [
         sortOrder: 0,
       },
     ],
-    featured: true,
+    featured: false,
     createdAt: "2026-06-28",
   },
   {

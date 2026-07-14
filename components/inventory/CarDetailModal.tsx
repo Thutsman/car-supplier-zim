@@ -32,7 +32,9 @@ export function CarDetailModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto border-border bg-card p-0 sm:max-w-4xl">
+      {/* block, not the default grid: grid row-sizing collapses the
+          aspect-ratio gallery row and the thumbnails overlap the photo */}
+      <DialogContent className="block max-h-[90vh] max-w-3xl overflow-y-auto border-border bg-card p-0 sm:max-w-4xl">
         <DialogHeader className="sr-only">
           <DialogTitle>
             {vehicle.year} {vehicle.make} {vehicle.model}

@@ -1,12 +1,9 @@
 import { randomUUID } from "node:crypto";
-import { getStore, type StoredUpload } from "./store";
-import { UPLOADS_BASE_PATH, isEphemeralUpload } from "./upload-urls";
+import { createClient } from "@/lib/supabase/server";
 import type { Vehicle } from "./types";
 
 /**
- * Interim image storage: Buffers in the in-memory store, served by
- * app/api/uploads/[id]/route.ts. Swapped for Supabase Storage in Phase 2
- * (docs/cms-phase2.md) — only this file's internals change.
+ * Photo storage backed by Supabase Storage's `vehicle-images` bucket.
  */
 
 export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
@@ -16,10 +13,19 @@ export const ALLOWED_UPLOAD_TYPES = [
   "image/webp",
 ] as const;
 
+const BUCKET = "vehicle-images";
+
 export function isAllowedUploadType(type: string): boolean {
   return (ALLOWED_UPLOAD_TYPES as readonly string[]).includes(type);
 }
 
+function extFor(type: string): string {
+  if (type === "image/png") return "png";
+  if (type === "image/webp") return "webp";
+  return "jpg";
+}
+
+/** Uploads a photo and returns its public URL. */
 export async function saveUpload(file: File): Promise<string> {
   if (!isAllowedUploadType(file.type)) {
     throw new Error(`Unsupported image type: ${file.type || "unknown"}`);
@@ -27,29 +33,35 @@ export async function saveUpload(file: File): Promise<string> {
   if (file.size > MAX_UPLOAD_BYTES) {
     throw new Error("Image exceeds the 5MB limit");
   }
-  const id = randomUUID();
-  const buffer = Buffer.from(await file.arrayBuffer());
-  getStore().uploads.set(id, { buffer, contentType: file.type });
-  return id;
+
+  const supabase = await createClient();
+  const path = `vehicles/${randomUUID()}.${extFor(file.type)}`;
+  const { error } = await supabase.storage.from(BUCKET).upload(path, file, {
+    contentType: file.type,
+  });
+  if (error) throw new Error(`Upload failed: ${error.message}`);
+
+  const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
+  return data.publicUrl;
 }
 
-export async function getUpload(
-  id: string
-): Promise<StoredUpload | undefined> {
-  return getStore().uploads.get(id);
+function storagePathFromUrl(url: string): string | null {
+  const marker = `/storage/v1/object/public/${BUCKET}/`;
+  const i = url.indexOf(marker);
+  return i === -1 ? null : url.slice(i + marker.length);
 }
 
-export async function deleteUpload(id: string): Promise<void> {
-  getStore().uploads.delete(id);
-}
-
-/** Free stored buffers for a vehicle's ephemeral images (e.g. on delete). */
+/** Frees Storage objects for a vehicle's images. URLs outside our bucket
+ * (e.g. the legacy Unsplash placeholders) are skipped — nothing to delete. */
 export async function deleteUploadsForImages(
   images: Vehicle["images"]
 ): Promise<void> {
-  for (const image of images) {
-    if (isEphemeralUpload(image.url)) {
-      await deleteUpload(image.url.slice(UPLOADS_BASE_PATH.length));
-    }
-  }
+  const paths = images
+    .map((img) => storagePathFromUrl(img.url))
+    .filter((p): p is string => p !== null);
+  if (paths.length === 0) return;
+
+  const supabase = await createClient();
+  const { error } = await supabase.storage.from(BUCKET).remove(paths);
+  if (error) throw new Error(`Failed to delete images: ${error.message}`);
 }

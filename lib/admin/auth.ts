@@ -1,10 +1,12 @@
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin/session";
+import { createClient } from "@/lib/supabase/server";
 
 export async function isAdmin(): Promise<boolean> {
-  const jar = await cookies();
-  return verifySessionToken(jar.get(ADMIN_COOKIE)?.value);
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user !== null;
 }
 
 /**

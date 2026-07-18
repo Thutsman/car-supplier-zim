@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { isEphemeralUpload } from "@/lib/data/upload-urls";
 import { cn } from "@/lib/utils";
 import type { VehicleImage } from "@/lib/data/types";
 
@@ -108,7 +107,6 @@ export function VehicleGallery({ images, title }: VehicleGalleryProps) {
               src={current.url}
               alt={current.alt}
               fill
-              unoptimized={isEphemeralUpload(current.url)}
               className="pointer-events-none object-cover"
               sizes="(max-width: 896px) 100vw, 896px"
               priority
@@ -151,7 +149,6 @@ export function VehicleGallery({ images, title }: VehicleGalleryProps) {
                 src={img.url}
                 alt={img.alt}
                 fill
-                unoptimized={isEphemeralUpload(img.url)}
                 className="object-cover"
                 sizes="96px"
               />
@@ -184,7 +181,6 @@ export function VehicleGallery({ images, title }: VehicleGalleryProps) {
                   src={current.url}
                   alt={current.alt}
                   fill
-                  unoptimized={isEphemeralUpload(current.url)}
                   className="object-contain"
                   sizes="100vw"
                   quality={90}
@@ -200,7 +196,6 @@ export function VehicleGallery({ images, title }: VehicleGalleryProps) {
                 src={current.url}
                 alt={current.alt}
                 fill
-                unoptimized={isEphemeralUpload(current.url)}
                 className="object-contain"
                 sizes="100vw"
                 quality={90}

@@ -1,5 +1,6 @@
 "use server";
 
+import { randomUUID } from "node:crypto";
 import { refresh } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireAdmin } from "@/lib/admin/auth";
@@ -14,7 +15,6 @@ import {
   deleteUploadsForImages,
   saveUpload,
 } from "@/lib/data/uploads-repo";
-import { uploadUrl } from "@/lib/data/upload-urls";
 import type { Vehicle, VehicleImage } from "@/lib/data/types";
 import {
   MAX_VEHICLE_IMAGES,
@@ -61,10 +61,10 @@ async function buildImages(
     } else {
       const file = newFiles[entry.index];
       if (file && file.size > 0) {
-        const id = await saveUpload(file);
+        const url = await saveUpload(file);
         images.push({
-          id: `img-${id}`,
-          url: uploadUrl(id),
+          id: randomUUID(),
+          url,
           alt: `${altBase} — photo ${images.length + 1}`,
           sortOrder: images.length,
         });

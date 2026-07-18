@@ -15,13 +15,24 @@ export function LoginForm() {
   return (
     <form action={formAction} className="space-y-5">
       <div className="space-y-2">
-        <Label htmlFor="password">Admin password</Label>
+        <Label htmlFor="email">Email</Label>
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          autoFocus
+          required
+          placeholder="admin@carsupplier.com"
+        />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="password">Password</Label>
         <Input
           id="password"
           name="password"
           type="password"
           autoComplete="current-password"
-          autoFocus
           required
           placeholder="••••••••"
         />

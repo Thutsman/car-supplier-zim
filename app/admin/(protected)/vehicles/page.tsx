@@ -14,7 +14,6 @@ import { DeleteVehicleButton } from "@/components/admin/DeleteVehicleButton";
 import { StatusBadge } from "@/components/inventory/StatusBadge";
 import { requireAdmin } from "@/lib/admin/auth";
 import { getVehicles } from "@/lib/data/vehicles-repo";
-import { isEphemeralUpload } from "@/lib/data/upload-urls";
 import { formatMileage, formatPrice } from "@/lib/inventory/filters";
 
 export default async function AdminVehiclesPage() {
@@ -67,7 +66,6 @@ export default async function AdminVehiclesPage() {
                           src={photo.url}
                           alt={photo.alt}
                           fill
-                          unoptimized={isEphemeralUpload(photo.url)}
                           className="object-cover"
                           sizes="80px"
                         />

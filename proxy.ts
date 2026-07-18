@@ -1,21 +1,21 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin/session";
+import { updateSession } from "@/lib/supabase/middleware";
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const authed = verifySessionToken(request.cookies.get(ADMIN_COOKIE)?.value);
+  const { response, user } = await updateSession(request);
 
   if (pathname === "/admin/login") {
-    return authed
+    return user
       ? NextResponse.redirect(new URL("/admin/vehicles", request.url))
-      : NextResponse.next();
+      : response;
   }
 
-  if (!authed) {
+  if (!user) {
     return NextResponse.redirect(new URL("/admin/login", request.url));
   }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {

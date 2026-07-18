@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Gauge, Calendar, Settings2 } from "lucide-react";
+import { Gauge, Calendar, Settings2, ImageOff } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/inventory/StatusBadge";
@@ -28,13 +28,19 @@ export function CarCard({ vehicle, index = 0, onViewDetails }: CarCardProps) {
       className="group overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-shadow hover:shadow-lg hover:shadow-brand/10"
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
-        <Image
-          src={primaryImage.url}
-          alt={primaryImage.alt}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+        {primaryImage ? (
+          <Image
+            src={primaryImage.url}
+            alt={primaryImage.alt}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-muted-foreground">
+            <ImageOff className="h-8 w-8" />
+          </div>
+        )}
         {vehicle.status !== "available" ? (
           <StatusBadge
             status={vehicle.status}

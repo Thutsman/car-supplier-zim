@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, ImageOff, Maximize2, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import type { VehicleImage } from "@/lib/data/types";
@@ -47,6 +47,17 @@ export function VehicleGallery({ images, title }: VehicleGalleryProps) {
       });
     }
   }, [zoomed]);
+
+  // All hooks are above this line — safe to return early now. A vehicle
+  // can exist with no photos yet (just created in the CMS, or seeded
+  // ahead of an image migration).
+  if (!current) {
+    return (
+      <div className="flex aspect-[16/9] w-full items-center justify-center bg-black/5 text-muted-foreground">
+        <ImageOff className="h-10 w-10" />
+      </div>
+    );
+  }
 
   const arrows = count > 1 && (
     <>

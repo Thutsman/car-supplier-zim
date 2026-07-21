@@ -1,6 +1,14 @@
-import { MapPin, Phone, ExternalLink } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { company, getPhoneUrl, getWhatsAppUrl } from "@/lib/data/company";
+
+function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
+      <path d="M13.5 21v-7.5h2.5l.5-3H13.5V8.5c0-.87.24-1.5 1.53-1.5H16.5V4.36c-.26-.035-1.15-.11-2.19-.11-2.17 0-3.66 1.32-3.66 3.75V10.5H8v3h2.65V21h2.85Z" />
+    </svg>
+  );
+}
 
 export function Footer() {
   return (
@@ -70,10 +78,10 @@ export function Footer() {
             href={company.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 transition-colors hover:text-brand-accent"
+            aria-label="Follow us on Facebook"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition-all hover:-translate-y-0.5 hover:border-brand-accent/40 hover:bg-brand-accent/15 hover:text-brand-accent"
           >
-            <ExternalLink className="h-4 w-4" />
-            Follow us on Facebook
+            <FacebookIcon className="h-4 w-4" />
           </a>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { MapPin, Phone } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { company, getPhoneUrl, getWhatsAppUrl } from "@/lib/data/company";
@@ -16,9 +17,19 @@ export function Footer() {
       <div className="section-padding mx-auto max-w-7xl">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
-            <h3 className="text-2xl font-extrabold text-white">
-              Car Supplier <span className="text-brand-accent">Zimbabwe</span>
-            </h3>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/brand/emblem.png"
+                alt=""
+                width={44}
+                height={44}
+                className="h-10 w-10 shrink-0"
+              />
+              <h3 className="text-2xl font-extrabold text-white">
+                Car Supplier{" "}
+                <span className="text-brand-accent">Zimbabwe</span>
+              </h3>
+            </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65">
               {company.description}
             </p>

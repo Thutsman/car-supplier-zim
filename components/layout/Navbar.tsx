@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -46,7 +47,15 @@ export function Navbar() {
       className="sticky top-0 z-50 bg-brand shadow-sm"
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6 md:px-10 lg:h-[4.25rem] lg:px-16">
-        <Link href="/" className="shrink-0">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5">
+          <Image
+            src="/brand/emblem.png"
+            alt=""
+            width={44}
+            height={44}
+            className="h-9 w-9 md:h-10 md:w-10"
+            priority
+          />
           <span className="text-lg font-extrabold tracking-tight text-white md:text-xl">
             Car Supplier{" "}
             <span className="text-brand-accent">Zimbabwe</span>
@@ -102,9 +111,18 @@ export function Navbar() {
 
             <div className="relative flex h-full flex-col">
               <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
-                <span className="text-lg font-extrabold tracking-tight text-white">
-                  Car Supplier{" "}
-                  <span className="text-brand-accent">Zimbabwe</span>
+                <span className="flex items-center gap-2.5">
+                  <Image
+                    src="/brand/emblem.png"
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="h-9 w-9"
+                  />
+                  <span className="text-lg font-extrabold tracking-tight text-white">
+                    Car Supplier{" "}
+                    <span className="text-brand-accent">Zimbabwe</span>
+                  </span>
                 </span>
                 <SheetClose asChild>
                   <Button

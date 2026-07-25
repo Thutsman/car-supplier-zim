@@ -1,12 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CarCard } from "@/components/inventory/CarCard";
-import { CarDetailModal } from "@/components/inventory/CarDetailModal";
 import type { Vehicle } from "@/lib/data/types";
 
 interface FeaturedVehiclesProps {
@@ -14,14 +12,6 @@ interface FeaturedVehiclesProps {
 }
 
 export function FeaturedVehicles({ vehicles }: FeaturedVehiclesProps) {
-  const [selected, setSelected] = useState<Vehicle | null>(null);
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const handleViewDetails = (vehicle: Vehicle) => {
-    setSelected(vehicle);
-    setModalOpen(true);
-  };
-
   return (
     <section className="border-y border-border bg-secondary">
       <div className="section-padding mx-auto max-w-7xl">
@@ -57,20 +47,9 @@ export function FeaturedVehicles({ vehicles }: FeaturedVehiclesProps) {
 
         <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
           {vehicles.slice(0, 6).map((vehicle, index) => (
-            <CarCard
-              key={vehicle.id}
-              vehicle={vehicle}
-              index={index}
-              onViewDetails={handleViewDetails}
-            />
+            <CarCard key={vehicle.id} vehicle={vehicle} index={index} />
           ))}
         </div>
-
-        <CarDetailModal
-          vehicle={selected}
-          open={modalOpen}
-          onOpenChange={setModalOpen}
-        />
       </div>
     </section>
   );

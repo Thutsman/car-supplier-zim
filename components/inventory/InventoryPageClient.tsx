@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { CarCard } from "@/components/inventory/CarCard";
-import { CarDetailModal } from "@/components/inventory/CarDetailModal";
 import {
   InventoryFiltersPanel,
   InventorySortSelect,
@@ -36,18 +35,11 @@ export function InventoryPageClient({
   const [filters, setFilters] = useState<InventoryFilters>(() =>
     getDefaultFilters(bounds)
   );
-  const [selected, setSelected] = useState<Vehicle | null>(null);
-  const [modalOpen, setModalOpen] = useState(false);
 
   const filtered = useMemo(
     () => filterAndSortVehicles(vehicles, filters),
     [vehicles, filters]
   );
-
-  const handleViewDetails = (vehicle: Vehicle) => {
-    setSelected(vehicle);
-    setModalOpen(true);
-  };
 
   return (
     <div className="section-padding mx-auto max-w-7xl">
@@ -109,23 +101,12 @@ export function InventoryPageClient({
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {filtered.map((vehicle, index) => (
-                <CarCard
-                  key={vehicle.id}
-                  vehicle={vehicle}
-                  index={index}
-                  onViewDetails={handleViewDetails}
-                />
+                <CarCard key={vehicle.id} vehicle={vehicle} index={index} />
               ))}
             </div>
           )}
         </div>
       </div>
-
-      <CarDetailModal
-        vehicle={selected}
-        open={modalOpen}
-        onOpenChange={setModalOpen}
-      />
     </div>
   );
 }

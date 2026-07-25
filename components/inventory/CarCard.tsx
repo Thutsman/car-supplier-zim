@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Gauge, Calendar, Settings2, ImageOff } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -12,10 +13,9 @@ import { formatMileage, formatPrice } from "@/lib/inventory/filters";
 interface CarCardProps {
   vehicle: Vehicle;
   index?: number;
-  onViewDetails: (vehicle: Vehicle) => void;
 }
 
-export function CarCard({ vehicle, index = 0, onViewDetails }: CarCardProps) {
+export function CarCard({ vehicle, index = 0 }: CarCardProps) {
   const primaryImage = vehicle.images[0];
 
   return (
@@ -86,10 +86,10 @@ export function CarCard({ vehicle, index = 0, onViewDetails }: CarCardProps) {
         </div>
 
         <Button
+          asChild
           className="mt-6 w-full rounded-full bg-brand font-bold text-white hover:bg-brand-dark"
-          onClick={() => onViewDetails(vehicle)}
         >
-          View Details
+          <Link href={`/inventory/${vehicle.id}`}>View Details</Link>
         </Button>
       </div>
     </motion.article>

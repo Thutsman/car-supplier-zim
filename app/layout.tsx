@@ -78,7 +78,7 @@ const businessJsonLd = {
     addressRegion: company.address.region,
     addressCountry: "ZW",
   },
-  sameAs: [company.facebook],
+  sameAs: [company.facebook, company.instagram, company.tiktok],
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: [

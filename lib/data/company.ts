@@ -18,6 +18,8 @@ export const company = {
   whatsapp: "263772858359",
   email: "TODO: replace with real email",
   facebook: "https://www.facebook.com/share/18hZxoMf4R/",
+  instagram: "https://www.instagram.com/car_supplier_zimbabwe?igsh=bHc2bWhrZWxkdDh4&utm_source=qr",
+  tiktok: "https://www.tiktok.com/@carsupplierzimbabwe?_r=1&_t=ZS-98KEvcGapG8",
   hours: "Always open",
   followers: "17K",
   services: [

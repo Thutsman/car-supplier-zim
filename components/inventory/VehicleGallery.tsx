@@ -194,7 +194,6 @@ export function VehicleGallery({ images, title }: VehicleGalleryProps) {
                   fill
                   className="object-contain"
                   sizes="100vw"
-                  quality={90}
                 />
               </div>
             </div>
@@ -209,7 +208,6 @@ export function VehicleGallery({ images, title }: VehicleGalleryProps) {
                 fill
                 className="object-contain"
                 sizes="100vw"
-                quality={90}
               />
             </div>
           )}

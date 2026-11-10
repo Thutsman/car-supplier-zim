@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    // Vercel's free tier meters image "transformations" (one per unique photo + size + format).
+    // Keep that count low: one output format, a short list of sizes, and long caching.
+    formats: ["image/webp"],
+    deviceSizes: [640, 828, 1200, 1920],
+    imageSizes: [96, 256, 384],
+    minimumCacheTTL: 60 * 60 * 24 * 31,
     remotePatterns: [
       {
         protocol: "https",

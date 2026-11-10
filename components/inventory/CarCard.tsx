@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { isSelfHostedPhoto } from "@/lib/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Gauge, Calendar, Settings2, ImageOff } from "lucide-react";
@@ -31,6 +32,7 @@ export function CarCard({ vehicle, index = 0 }: CarCardProps) {
         {primaryImage ? (
           <Image
             src={primaryImage.url}
+            unoptimized={isSelfHostedPhoto(primaryImage.url)}
             alt={primaryImage.alt}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"

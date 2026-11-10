@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { isSelfHostedPhoto } from "@/lib/image";
 import Link from "next/link";
 import { Pencil, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -64,6 +65,7 @@ export default async function AdminVehiclesPage() {
                       {photo && (
                         <Image
                           src={photo.url}
+                          unoptimized={isSelfHostedPhoto(photo.url)}
                           alt={photo.alt}
                           fill
                           className="object-cover"

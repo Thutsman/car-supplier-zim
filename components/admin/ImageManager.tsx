@@ -2,11 +2,21 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
+import imageCompression from "browser-image-compression";
 import { ArrowDown, ArrowUp, ImagePlus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MAX_VEHICLE_IMAGES } from "@/lib/validations/vehicle";
 
-const MAX_FILE_BYTES = 5 * 1024 * 1024;
+// Originals can be big phone photos; we shrink them below before upload, so allow more here.
+const MAX_FILE_BYTES = 5 * 1024 * 1024; // server limit
+const MAX_ORIGINAL_BYTES = 25 * 1024 * 1024;
+// Photos are served as-is (no Vercel image optimizer), so shrink once, here.
+const COMPRESS_OPTIONS = {
+  maxWidthOrHeight: 1600,
+  maxSizeMB: 0.4,
+  fileType: "image/webp",
+  useWebWorker: true,
+} as const;
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 export type ManagedImage =
@@ -23,25 +33,40 @@ let nextKey = 0;
 export function ImageManager({ images, onChange }: ImageManagerProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
 
-  const addFiles = (fileList: FileList | null) => {
+  const addFiles = async (fileList: FileList | null) => {
     if (!fileList) return;
     setError(null);
+    setBusy(true);
     const additions: ManagedImage[] = [];
     for (const file of Array.from(fileList)) {
       if (!ALLOWED_TYPES.includes(file.type)) {
         setError(`"${file.name}" is not a JPEG, PNG, or WebP image.`);
         continue;
       }
-      if (file.size > MAX_FILE_BYTES) {
-        setError(`"${file.name}" is over the 5MB limit.`);
+      if (file.size > MAX_ORIGINAL_BYTES) {
+        setError(`"${file.name}" is over the 25MB limit.`);
         continue;
+      }
+      let out: File = file;
+      try {
+        const blob = await imageCompression(file, COMPRESS_OPTIONS);
+        out = new File([blob], file.name.replace(/\.[^.]+$/, "") + ".webp", {
+          type: "image/webp",
+        });
+      } catch {
+        // Couldn't shrink it: keep the original if the server will still accept it.
+        if (file.size > MAX_FILE_BYTES) {
+          setError(`Couldn't process "${file.name}". Try a smaller photo.`);
+          continue;
+        }
       }
       additions.push({
         kind: "new",
         key: `new-${nextKey++}`,
-        file,
-        previewUrl: URL.createObjectURL(file),
+        file: out,
+        previewUrl: URL.createObjectURL(out),
       });
     }
     const merged = [...images, ...additions];
@@ -49,6 +74,7 @@ export function ImageManager({ images, onChange }: ImageManagerProps) {
       setError(`Maximum ${MAX_VEHICLE_IMAGES} photos per vehicle.`);
     }
     onChange(merged.slice(0, MAX_VEHICLE_IMAGES));
+    setBusy(false);
   };
 
   const removeAt = (index: number) => {
@@ -154,13 +180,14 @@ export function ImageManager({ images, onChange }: ImageManagerProps) {
         type="button"
         variant="outline"
         className="mt-3 rounded-full border-brand/30 font-semibold hover:bg-brand/5 hover:text-brand"
+        disabled={busy}
         onClick={() => inputRef.current?.click()}
       >
         <ImagePlus className="mr-2 h-4 w-4" />
         Add photos
       </Button>
       <p className="mt-2 text-xs text-muted-foreground">
-        JPEG, PNG, or WebP up to 5MB each. First photo is the cover. Max{" "}
+        JPEG, PNG, or WebP up to 25MB each (shrunk automatically). First photo is the cover. Max{" "}
         {MAX_VEHICLE_IMAGES}.
       </p>
       {error && (

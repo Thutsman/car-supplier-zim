@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { isSelfHostedPhoto } from "@/lib/image";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ImageOff, Maximize2, X } from "lucide-react";
@@ -116,6 +117,7 @@ export function VehicleGallery({ images, title }: VehicleGalleryProps) {
           >
             <Image
               src={current.url}
+              unoptimized={isSelfHostedPhoto(current.url)}
               alt={current.alt}
               fill
               className="pointer-events-none object-cover"
@@ -158,6 +160,7 @@ export function VehicleGallery({ images, title }: VehicleGalleryProps) {
             >
               <Image
                 src={img.url}
+                unoptimized={isSelfHostedPhoto(img.url)}
                 alt={img.alt}
                 fill
                 className="object-cover"
@@ -190,6 +193,7 @@ export function VehicleGallery({ images, title }: VehicleGalleryProps) {
                     the already-loaded candidate — no blank refetch on zoom */}
                 <Image
                   src={current.url}
+                  unoptimized={isSelfHostedPhoto(current.url)}
                   alt={current.alt}
                   fill
                   className="object-contain"
@@ -204,6 +208,7 @@ export function VehicleGallery({ images, title }: VehicleGalleryProps) {
             >
               <Image
                 src={current.url}
+                unoptimized={isSelfHostedPhoto(current.url)}
                 alt={current.alt}
                 fill
                 className="object-contain"
